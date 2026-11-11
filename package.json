@@ -30,6 +30,8 @@
     "stripe": "^23.1.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.14"
+    "@vercel/node": "^30.0.0",
+    "nodemon": "^3.1.14",
+    "vercel": "^65.14.0"
   }
 }

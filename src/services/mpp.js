@@ -1,4 +1,5 @@
 const { Mppx, tempo, discovery } = require("mppx/express");
+const { Store } = require("mppx/server");
 
 const PRICE = process.env.MPP_PRICE || process.env.X402_PRICE || "0.01";
 
@@ -19,11 +20,15 @@ function createMpp() {
   const recipient = requireEnv("TEMPO_DEPOSIT_ADDRESS");
   const testnet = String(process.env.TEMPO_TESTNET || "true").toLowerCase() !== "false";
 
+  // Explicit memory store is required in production/serverless.
+  const store = Store.memory();
+
   const mppx = Mppx.create({
     methods: [
       tempo({
         recipient,
         testnet,
+        store,
       }),
     ],
     secretKey,
