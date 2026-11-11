@@ -1,0 +1,101 @@
+{
+  "version": 2,
+  "providers": {
+    "flyio": {
+      "name": "Flyio"
+    },
+    "railway": {
+      "name": "Railway"
+    },
+    "vercel": {
+      "name": "Vercel"
+    }
+  },
+  "resources": {
+    "dublin-arrivals": {
+      "livemode": true,
+      "name": "dublin-arrivals",
+      "providerName": "Railway",
+      "serviceId": "hosting"
+    },
+    "dublin-arrivals-2": {
+      "livemode": true,
+      "name": "dublin-arrivals-2",
+      "providerName": "Railway",
+      "serviceId": "hosting"
+    },
+    "dublin-arrivals-web": {
+      "livemode": true,
+      "name": "dublin-arrivals-web",
+      "providerName": "Vercel",
+      "serviceId": "project"
+    },
+    "railway-plan": {
+      "livemode": true,
+      "name": "railway-plan",
+      "providerName": "Railway",
+      "serviceId": "free"
+    },
+    "vercel-plan": {
+      "livemode": true,
+      "name": "vercel-plan",
+      "providerName": "Vercel",
+      "serviceId": "hobby"
+    }
+  },
+  "environments": {
+    "default": {
+      "output": ".env",
+      "resources": [
+        {
+          "resourceName": "dublin-arrivals"
+        },
+        {
+          "resourceName": "dublin-arrivals-web"
+        },
+        {
+          "resourceName": "railway-plan"
+        },
+        {
+          "resourceName": "vercel-plan"
+        }
+      ],
+      "variables": [
+        {
+          "variableName": "mpp-price",
+          "envKey": "MPP_PRICE"
+        },
+        {
+          "variableName": "mpp-secret",
+          "envKey": "MPP_SECRET_KEY"
+        },
+        {
+          "variableName": "tempo-deposit",
+          "envKey": "TEMPO_DEPOSIT_ADDRESS"
+        },
+        {
+          "variableName": "tempo-testnet",
+          "envKey": "TEMPO_TESTNET"
+        }
+      ]
+    }
+  },
+  "variables": {
+    "mpp-price": {
+      "name": "mpp-price",
+      "backendId": "fprjvar_61Vk1469nFIqrig1D16Vjwc6AYGCFhLEosV1AGVIWHw0"
+    },
+    "mpp-secret": {
+      "name": "mpp-secret",
+      "backendId": "fprjvar_61Vk13xdPCxzowUoJ16Vjwc6AYGCFhLEosV1AGVIW7UO"
+    },
+    "tempo-deposit": {
+      "name": "tempo-deposit",
+      "backendId": "fprjvar_61Vk1409XSM1N37KY16Vjwc6AYGCFhLEosV1AGVIWDWq"
+    },
+    "tempo-testnet": {
+      "name": "tempo-testnet",
+      "backendId": "fprjvar_61Vk143vBVIYdKhhZ16Vjwc6AYGCFhLEosV1AGVIWHd2"
+    }
+  }
+}

@@ -87,8 +87,4 @@ function findFlight(flights, flightNumber) {
   });
 }
 
-module.exports = {
-  fetchArrivals,
-  findFlight,
-  todayInDublin,
-};
+export { fetchArrivals, findFlight, todayInDublin };

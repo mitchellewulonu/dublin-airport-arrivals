@@ -1,11 +1,11 @@
-const express = require("express");
-const cors = require("cors");
-const {
+import express from "express";
+import cors from "cors";
+import {
   fetchArrivals,
   findFlight,
   todayInDublin,
-} = require("./services/dublinAirport");
-const { createMpp } = require("./services/mpp");
+} from "./services/dublinAirport.js";
+import { createMpp } from "./services/mpp.js";
 
 function createApp() {
   const app = express();
@@ -126,4 +126,4 @@ function createApp() {
   return { app, mpp };
 }
 
-module.exports = { createApp };
+export { createApp };

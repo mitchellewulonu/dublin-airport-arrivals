@@ -1,5 +1,5 @@
-const { Mppx, tempo, discovery } = require("mppx/express");
-const { Store } = require("mppx/server");
+import { Mppx, tempo, discovery } from "mppx/express";
+import { Store } from "mppx/server";
 
 const PRICE = process.env.MPP_PRICE || process.env.X402_PRICE || "0.01";
 
@@ -18,7 +18,8 @@ function requireEnv(name) {
 function createMpp() {
   const secretKey = requireEnv("MPP_SECRET_KEY");
   const recipient = requireEnv("TEMPO_DEPOSIT_ADDRESS");
-  const testnet = String(process.env.TEMPO_TESTNET || "true").toLowerCase() !== "false";
+  const testnet =
+    String(process.env.TEMPO_TESTNET || "true").toLowerCase() !== "false";
 
   // Explicit memory store is required in production/serverless.
   const store = Store.memory();
@@ -52,7 +53,4 @@ function createMpp() {
   };
 }
 
-module.exports = {
-  PRICE,
-  createMpp,
-};
+export { PRICE, createMpp };

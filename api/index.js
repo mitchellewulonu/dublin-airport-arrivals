@@ -1,12 +1,12 @@
-require("dotenv").config();
+import "dotenv/config";
+import express from "express";
 
 let app;
 
 try {
-  const { createApp } = require("../src/app");
+  const { createApp } = await import("../src/app.js");
   app = createApp().app;
 } catch (err) {
-  const express = require("express");
   app = express();
   app.use((_req, res) => {
     res.status(500).json({
@@ -16,4 +16,4 @@ try {
   });
 }
 
-module.exports = app;
+export default app;
