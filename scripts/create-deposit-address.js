@@ -1,61 +1,31 @@
 #!/usr/bin/env node
 /**
- * Creates a Stripe crypto deposit address for x402 Base payments.
- * Prints the address (and optionally appends DEPOSIT_ADDRESS to .env).
- *
- * Usage:
- *   node scripts/create-deposit-address.js
- *   node scripts/create-deposit-address.js --write-env
+ * Creates a Stripe crypto deposit address.
+ * Usage: node scripts/create-deposit-address.js [tempo|base]
  */
 require("dotenv").config();
 
-const fs = require("fs");
-const path = require("path");
-const {
-  createDepositAddress,
-  createStripeClient,
-  STRIPE_API_VERSION,
-} = require("../src/services/x402");
+const Stripe = require("stripe");
+
+const network = process.argv[2] || "tempo";
+const STRIPE_API_VERSION = "2026-07-29.preview";
 
 async function main() {
-  const writeEnv = process.argv.includes("--write-env");
-  const stripe = createStripeClient();
-  const address = await createDepositAddress(stripe);
+  const secretKey = process.env.STRIPE_SECRET_KEY;
+  if (!secretKey) throw new Error("Missing STRIPE_SECRET_KEY");
 
-  console.log(JSON.stringify({
-    deposit_address: address,
-    stripe_api_version: STRIPE_API_VERSION,
-    network: "base",
-  }, null, 2));
+  const stripe = new Stripe(secretKey, { apiVersion: STRIPE_API_VERSION });
+  const response = await stripe.rawRequest(
+    "POST",
+    "/v1/crypto/deposit_addresses",
+    { network },
+    { apiVersion: STRIPE_API_VERSION }
+  );
 
-  if (writeEnv) {
-    const envPath = path.join(__dirname, "..", ".env");
-    let existing = "";
-    try {
-      existing = fs.readFileSync(envPath, "utf8");
-    } catch {
-      existing = "";
-    }
+  const address = response?.address || response?.destination?.address;
+  if (!address) throw new Error(`Unexpected response: ${JSON.stringify(response)}`);
 
-    if (/^DEPOSIT_ADDRESS=/m.test(existing)) {
-      existing = existing.replace(
-        /^DEPOSIT_ADDRESS=.*$/m,
-        `DEPOSIT_ADDRESS=${address}`
-      );
-    } else {
-      existing =
-        existing.replace(/\s*$/, "") +
-        `\nDEPOSIT_ADDRESS=${address}\n`;
-    }
-
-    fs.writeFileSync(envPath, existing, "utf8");
-    console.error(`Wrote DEPOSIT_ADDRESS to ${envPath}`);
-  } else {
-    console.error(
-      "Add to .env:\nDEPOSIT_ADDRESS=" + address +
-        "\n(or re-run with --write-env)"
-    );
-  }
+  console.log(JSON.stringify({ network, deposit_address: address }, null, 2));
 }
 
 main().catch((err) => {
