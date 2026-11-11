@@ -1,0 +1,37 @@
+{
+  "version": 4,
+  "project": {
+    "catalog": "prod",
+    "initializedAt": "2026-11-11T15:01:17.604Z",
+    "merchantDisplayName": null,
+    "merchantId": "acct_1UaYekK39JLRC83J",
+    "projectId": "project_61Vk0yrKNp5l2gM4q16Vjwc6AYGCFhLEosV1AGVIW3ia",
+    "projectName": "dublin-airport-arrivals"
+  },
+  "providers": {
+    "railway": {
+      "accountRequestId": "facctrq_61Vk0zLyoIl4G8kBv16Vjwc6AYGCFhLEosV1AGVIWPBw",
+      "configuration": {},
+      "linkedAt": "2026-11-11T15:01:49.072Z",
+      "providerId": "prvdr_61UK2uWsoydL7tUBp57Fg",
+      "providerName": "Railway",
+      "redirectUrl": null,
+      "requestedAt": "2026-11-11T15:01:47.417Z",
+      "status": "complete"
+    }
+  },
+  "resources": {
+    "railway-plan": {
+      "configuration": {},
+      "createdAt": "2026-11-11T15:01:50.313Z",
+      "lastRevealedAt": "2026-11-11T15:01:50.704Z",
+      "lastStatus": "complete",
+      "livemode": true,
+      "name": "railway-plan",
+      "providerId": "prvdr_61UK2uWsoydL7tUBp57Fg",
+      "providerName": "Railway",
+      "resourceId": "fres_61Vk0zNKbWZarPVDu16Vjwc6AYGCFhLEosV1AGVIW5xw",
+      "serviceId": "free"
+    }
+  }
+}
